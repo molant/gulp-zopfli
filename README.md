@@ -50,7 +50,7 @@ zopfli({ threshold: true })
 
 ### zopfliOptions `Object`
 
-Options object to pass through to node-zopfli. See [node-zopfli documentation](https://github.com/pierreinglebert/node-zopfli#options-default) for more information.
+Options object to pass through to node-zopfli. See [node-zopfli documentation](https://github.com/pierreinglebert/node-zopfli#options) for more information.
 
 ```javascript
 {
