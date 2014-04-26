@@ -1,4 +1,2 @@
-node_modules/*
-test/*
-!test/input.txt
-!test/test.js
+node_modules
+test/tmp

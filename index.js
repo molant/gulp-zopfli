@@ -1,11 +1,14 @@
-/*jshint bitwise:true, camelcase:true, curly:true, eqeqeq:true, forin:true, immed:true, latedef:true,
- newcap:true, noarg:true, noempty:true, nonew:true, plusplus:true, regexp:true, undef:true,
- unused:true, strict:true, trailing:true, indent:2, quotmark:single, esnext:true, node:true */
-var es = require('event-stream');
-var clone = require('clone');
-var zopfli = require('node-zopfli');
+/*jshint node:true */
+'use strict';
 
-const PLUGIN_NAME = 'gulp-zopfli';
+var through2    = require('through2');
+var PluginError = require('gulp-util').PluginError;
+var bufferMode  = require('./lib/buffer');
+var streamMode  = require('./lib/stream');
+var _ = require('lodash');
+var bytes = require('bytes');
+
+var PLUGIN_NAME = 'gulp-zopfli';
 
 /**
  *
@@ -18,85 +21,75 @@ const PLUGIN_NAME = 'gulp-zopfli';
  * "blank" (default) to output nothing
  * @returns {Stream}
  */
-module.exports = function(opts) {
-  'use strict';
-  // default options
-  var options = opts || {};
-  var format = options.format || 'gzip';
+module.exports = function(options) {
 
-  var ext;
-
-  if(format === 'gzip') {
-    ext = '.gz';
-  } else if(format === 'deflate') {
-    ext = '.deflate';
-  } else if(format === 'zlib') {
-    ext = '.zz';
+  options = options || {};
+  _.defaults(options, {
+    format: 'gzip',
+    append: true,
+    threshold: false,
+    zopfliOptions: {}
+  });
+  if(options.threshold) {
+    if(typeof options.threshold != 'number') {
+      if(typeof options.threshold == 'string') {
+        options.threshold = bytes(options.threshold);
+      } else {
+        options.threshold = 150;
+      }
+    }
+    options.threshold = Math.max(1, options.threshold);
   }
 
-  // delete format option
-  if(options.format !== null) {
-    delete options.format;
+  var ext = '';
+  if(options.append) {
+    if(options.format === 'gzip') {
+      ext = '.gz';
+    } else if(options.format === 'deflate') {
+      ext = '.deflate';
+    } else if(options.format === 'zlib') {
+      ext = '.zz';
+    }
   }
 
-  var compress = function(file, callback) {
+  var stream = through2.obj(compress);
+  stream.options = options;
 
-    // pass along empty files
-    if(file.isNull()) {
-      return callback(null, file);
+  function compress(file, enc, done) {
+
+    /*jshint validthis: true */
+    var self = this;
+
+    // Check for empty file
+    if (file.isNull()) {
+      // Pass along the empty file to the next plugin
+      this.push(file);
+      done();
+      return;
     }
 
-    // clone file and append the extension
-    var newFile = clone(file);
-    newFile.path += ext;
-    newFile.shortened += ext;
+    // Call when finished with compression
+    var finished = function(err, contents, wasCompressed) {
+      if (err) {
+        var error = new PluginError(PLUGIN_NAME, err, { showStack: true });
+        self.emit('error', error);
+        done();
+        return;
+      }
+      if (options.append && wasCompressed) file.path += ext;
+      file.contents = contents;
+      self.push(file);
+      done();
+      return;
+    };
 
-    // Check if file is a buffer or a stream
+    // Check if file contents is a buffer or a stream
     if(file.isBuffer()) {
-
-      // File contents is a buffer
-      var zcb = function(err, buffer) {
-        if(!err) {
-          if(options.thresholdRatio > file.contents.length / buffer.length) {
-            if(options.thresholdBehavior === 'original'){
-              // output original file
-              return callback(null, file);
-            }
-            // output nothing
-            return callback();
-          }
-          newFile.contents = buffer;
-          // output compressed file
-          return callback(null, newFile);
-        }
-        callback(err, null);
-      };
-
-      if(format === 'gzip') {
-        zopfli.gzip(file.contents, options, zcb);
-      } else if(format === 'deflate') {
-        zopfli.deflate(file.contents, options, zcb);
-      } else if(format === 'zlib') {
-        zopfli.zlib(file.contents, options, zcb);
-      }
-    } else if(file.isStream()) {
-
-      // File contains a stream
-
-      var z;
-      if(format === 'gzip') {
-        z = zopfli.createGzip(options);
-      } else if(format === 'deflate') {
-        z = zopfli.createDeflate(options);
-      } else if(format === 'zlib') {
-        z = zopfli.createZlib(options);
-      }
-      newFile.contents = file.contents
-        .pipe(z);
-      // .pipe(es.through());
-      callback(null, newFile);
+      bufferMode(file.contents, options, finished);
+    } else {
+      streamMode(file.contents, options, finished);
     }
-  };
+  }
 
-  return es.map(compress);
+  return stream;
 };
