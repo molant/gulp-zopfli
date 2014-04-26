@@ -13,16 +13,47 @@ based on [node-zopfli](https://npmjs.org/package/node-zopfli).
 npm install --save-dev gulp-zopfli
 ```
 
-## Options
+##Options
 
-You can pass an options array to the zopfli object. These options are
-passed on to `node-zopfli` library, except for one: the `format` options is 
-used to pick a compression format. The possible formats are: `"deflate"`, `"zlib"` or `"gzip"`.
+### format `String`
 
-The defaults options are:
+Choose an output format, you can choose between `gzip`, `zlib` or `deflate`. Defaults to gzip.
+
+```javascript
+ zopfli({ format: 'zlib' })
+ ```
+
+
+### append `Boolean`
+
+Appends `.gz`, `.zz` or `.deflate` file extension if true depending on the format chosen. Defaults to true.
+
+```javascript
+ zopfli({ append: true })
+ ```
+
+### threshold `String|Number|Boolean`
+
+Minimum size required to compress a file. Defaults to false.
+
+```javascript
+zopfli({ threshold: '1kb' })
+```
+
+```javascript
+zopfli({ threshold: 1024 })
+```
+
+```javascript
+zopfli({ threshold: true })
+```
+
+### zopfliOptions `Object`
+
+Options object to pass through to node-zopfli. See [node-zopfli documentation](https://github.com/pierreinglebert/node-zopfli#options-default) for more information.
+
 ```javascript
 {
-    format: "gzip",
     verbose: false,
     verbose_more: false,
     numiterations: 15,
@@ -47,22 +78,9 @@ gulp.task("compress", function() {
 gulp.task("default", function() {
   gulp.run("compress");
 });
-```
-Since the plugin is based largely on it,
-if you're already using [gulp-gzip](https://github.com/jstuckey/gulp-gzip),
-switching to `zopfli` should be as easy as replacing
-
-```javascript
-var gzip = require("gulp-gzip");
-```
-by
-```javascript
-var gzip = require("gulp-zopfli");
-```
 
 
 Credit
 ======
 
-This plugin was based largely on [gulp-gzip](https://github.com/jstuckey/gulp-gzip),
-I basically just replaced `gzip` by `zopfli` so all credit is due to Jeremy.
+This plugin is based on [gulp-gzip](https://github.com/jstuckey/gulp-gzip).
