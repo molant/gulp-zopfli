@@ -32,7 +32,8 @@
     "gulp-util": "^2.2.14",
     "through2": "^0.4.1",
     "stream-to-array": "^1.0.0",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+    "should": "^3.3.1"
   },
   "devDependencies": {
     "nid": "^0.3.2",
@@ -47,7 +48,10 @@
   },
   "config": {
     "blanket": {
-      "pattern": ["lib", "index.js"],
+      "pattern": [
+        "lib",
+        "index.js"
+      ],
       "data-cover-never": "node_modules"
     }
   },

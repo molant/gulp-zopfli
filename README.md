@@ -4,6 +4,9 @@ gulp-zopfli
 a [Zopfli](http://en.wikipedia.org/wiki/Zopfli) plugin for [gulp](https://github.com/wearefractal/gulp),
 based on [node-zopfli](https://npmjs.org/package/node-zopfli).
 
+[![Build Status](https://secure.travis-ci.org/pierreinglebert/gulp-zopfli.png)](http://travis-ci.org/pierreinglebert/gulp-zopfli)
+[![Coverage Status](https://coveralls.io/repos/pierreinglebert/gulp-zopfli/badge.png?branch=master)](https://coveralls.io/r/pierreinglebert/gulp-zopfli?branch=master)
+
 ## Install
 
 ```
