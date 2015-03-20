@@ -5,7 +5,7 @@ var through2    = require('through2');
 var PluginError = require('gulp-util').PluginError;
 var bufferMode  = require('./lib/buffer');
 var streamMode  = require('./lib/stream');
-var _ = require('lodash');
+var defaults = require('lodash.defaults');
 var bytes = require('bytes');
 
 var PLUGIN_NAME = 'gulp-zopfli';
@@ -24,7 +24,7 @@ var PLUGIN_NAME = 'gulp-zopfli';
 module.exports = function(options) {
 
   options = options || {};
-  _.defaults(options, {
+  defaults(options, {
     format: 'gzip',
     append: true,
     threshold: false,
