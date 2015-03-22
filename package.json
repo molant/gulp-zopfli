@@ -1,6 +1,6 @@
 {
   "name": "gulp-zopfli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Zopfli compressor for gulp",
   "keywords": [
     "gulpplugin",
@@ -23,6 +23,8 @@
     "test": "make test"
   },
   "contributors": [
+    "Pierre Inglebert <pierre.inglebert@gmail.com>",
+    "Mayhem <stepien.nicolas@gmail.com>",
     "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
     "Jeremy Stuckey <jeremystuckey@gmail.com>"
   ],
