@@ -32,7 +32,7 @@ module.exports = function(options) {
   if(options.threshold) {
     if(typeof options.threshold != 'number') {
       if(typeof options.threshold == 'string') {
-        options.threshold = bytes(options.threshold);
+        options.threshold = bytes(options.threshold) || 150;
       } else {
         options.threshold = 150;
       }
