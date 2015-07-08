@@ -4,8 +4,12 @@ gulp-zopfli
 a [Zopfli](http://en.wikipedia.org/wiki/Zopfli) plugin for [gulp](https://github.com/wearefractal/gulp),
 based on [node-zopfli](https://npmjs.org/package/node-zopfli).
 
-[![Build Status](https://secure.travis-ci.org/pierreinglebert/gulp-zopfli.png)](http://travis-ci.org/pierreinglebert/gulp-zopfli)
-[![Coverage Status](https://coveralls.io/repos/pierreinglebert/gulp-zopfli/badge.png?branch=master)](https://coveralls.io/r/pierreinglebert/gulp-zopfli?branch=master)
+
+[![NPM version][npm-image]][npm-url]
+[![Linux Build Status][travis-image]][travis-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+[![Dependency Status][dep-image]][dep-url]
+[![devDependency Status][devDep-image]][devDep-url]
 
 ## Install
 
@@ -84,3 +88,15 @@ Credit
 ======
 
 This plugin is based on [gulp-gzip](https://github.com/jstuckey/gulp-gzip).
+
+
+[npm-image]: https://img.shields.io/npm/v/gulp-zopfli.svg
+[npm-url]: https://www.npmjs.com/package/gulp-zopfli
+[travis-image]: https://img.shields.io/travis/pierreinglebert/gulp-zopfli/master.svg?label=Linux%20build
+[travis-url]: https://travis-ci.org/pierreinglebert/gulp-zopfli
+[coveralls-image]: https://img.shields.io/coveralls/pierreinglebert/gulp-zopfli.svg
+[coveralls-url]: https://coveralls.io/r/pierreinglebert/gulp-zopfli?branch=master
+[dep-image]: https://img.shields.io/david/pierreinglebert/gulp-zopfli.svg
+[dep-url]: https://david-dm.org/pierreinglebert/gulp-zopfli
+[devDep-image]: https://img.shields.io/david/dev/pierreinglebert/gulp-zopfli.svg
+[devDep-url]: https://david-dm.org/pierreinglebert/gulp-zopfli#info=devDependencies
