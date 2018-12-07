@@ -1,3 +1,5 @@
+'use strict';
+
 var fs     = require('fs');
 var gulp   = require('gulp');
 var log    = require('gulp-util').log;
@@ -254,15 +256,15 @@ describe('gulp-zopfli', function() {
 
       it('should throw an error when given an incorrect format', function(done) {
         gulp.src('files/small.txt')
-        .pipe(zopfli({format: '7z'}))
-        .on('error', function(err) {
-          err.should.not.be.null;
-          done();
-        })
-        .pipe(tap(function(file) {
-          false.should.be.true;
-          done();
-        }));
+          .pipe(zopfli({format: '7z'}))
+          .on('error', function(err) {
+            err.should.not.be.null;
+            done();
+          })
+          .pipe(tap(function(file) {
+            false.should.be.true;
+            done();
+          }));
       });
     });
 
@@ -366,7 +368,7 @@ describe('gulp-zopfli', function() {
 
         gulp.src('files/small.txt', { buffer: false })
           .pipe(rename({ basename: id }))
-          .pipe(zopfli({format: "zlib"}))
+          .pipe(zopfli({format: 'zlib'}))
           .pipe(out);
       });
 
@@ -389,7 +391,7 @@ describe('gulp-zopfli', function() {
 
         gulp.src('files/small.txt', { buffer: false })
           .pipe(rename({ basename: id }))
-          .pipe(zopfli({format: "deflate"}))
+          .pipe(zopfli({format: 'deflate'}))
           .pipe(out);
       });
 
@@ -437,15 +439,15 @@ describe('gulp-zopfli', function() {
 
       it('should throw an error when given an incorrect format', function(done) {
         gulp.src('files/small.txt', { buffer: false })
-        .pipe(zopfli({format: '7z'}))
-        .on('error', function(err) {
-          err.should.not.be.null;
-          done();
-        })
-        .pipe(tap(function(file) {
-          false.should.be.true;
-          done();
-        }));
+          .pipe(zopfli({format: '7z'}))
+          .on('error', function(err) {
+            err.should.not.be.null;
+            done();
+          })
+          .pipe(tap(function(file) {
+            false.should.be.true;
+            done();
+          }));
       });
     });
 
@@ -476,7 +478,7 @@ describe('gulp-zopfli', function() {
         var size_highest_compression = 0;
 
         out_lowest_compression.on('end', function() {
-          fs.stat('./tmp/' + id_lowest_compression + '.txt.gz', function (err, stats) {
+          fs.stat('./tmp/' + id_lowest_compression + '.txt.gz', function(err, stats) {
             size_lowest_compression = stats.size;
 
             if (size_highest_compression > 0) {
@@ -487,7 +489,7 @@ describe('gulp-zopfli', function() {
         });
 
         out_highest_compression.on('end', function() {
-          fs.stat('./tmp/' + id_highest_compression + '.txt.gz', function (err, stats) {
+          fs.stat('./tmp/' + id_highest_compression + '.txt.gz', function(err, stats) {
             size_highest_compression = stats.size;
 
             if (size_lowest_compression > 0) {
@@ -519,7 +521,7 @@ describe('gulp-zopfli', function() {
         var size_highest_compression = 0;
 
         out_lowest_compression.on('end', function() {
-          fs.stat('./tmp/' + id_lowest_compression + '.txt.gz', function (err, stats) {
+          fs.stat('./tmp/' + id_lowest_compression + '.txt.gz', function(err, stats) {
             size_lowest_compression = stats.size;
             if (size_highest_compression > 0) {
               size_highest_compression.should.be.lessThan(size_lowest_compression);
@@ -529,7 +531,7 @@ describe('gulp-zopfli', function() {
         });
 
         out_highest_compression.on('end', function() {
-          fs.stat('./tmp/' + id_highest_compression + '.txt.gz', function (err, stats) {
+          fs.stat('./tmp/' + id_highest_compression + '.txt.gz', function(err, stats) {
             size_highest_compression = stats.size;
             if (size_lowest_compression > 0) {
               size_highest_compression.should.be.lessThan(size_lowest_compression);

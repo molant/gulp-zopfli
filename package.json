@@ -1,5 +1,5 @@
 {
-  "name": "gulp-zopfli",
+  "name": "gulp-zopfli-node",
   "version": "1.0.0",
   "description": "Zopfli compressor for gulp",
   "keywords": [
@@ -10,53 +10,49 @@
     "gzip",
     "gulp"
   ],
-  "homepage": "https://github.com/pierreinglebert/gulp-zopfli",
+  "homepage": "https://github.com/molant/gulp-zopfli",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pierreinglebert/gulp-zopfli.git"
+    "url": "https://github.com/molant/gulp-zopfli.git"
   },
   "author": {
     "name": "Romeo Van Snick",
     "email": "romeovs@gmail.com"
   },
   "scripts": {
-    "test": "make test"
+    "lint": "eslint .",
+    "mocha": "mocha test",
+    "test": "npm run lint && npm run mocha"
   },
   "contributors": [
     "Pierre Inglebert <pierre.inglebert@gmail.com>",
     "Mayhem <stepien.nicolas@gmail.com>",
     "TruongSinh Tran-Nguyen <i@truongsinh.pro>",
-    "Jeremy Stuckey <jeremystuckey@gmail.com>"
+    "Jeremy Stuckey <jeremystuckey@gmail.com>",
+    "molant <amolleda@gmail.com>"
   ],
   "dependencies": {
-    "bytes": "^2.1.0",
+    "bytes": "^3.0.0",
     "defaults": "^1.0.2",
     "gulp-util": "^3.0.4",
-    "node-zopfli": "^1.2.1",
+    "zopfli-node": "^2.0.3",
     "stream-to-array": "^2.0.2",
-    "through2": "^2.0.0"
+    "through2": "^3.0.0"
   },
   "devDependencies": {
-    "coveralls": "^2.11.2",
-    "gulp": "^3.8.11",
+    "eslint": "^5.9.0",
+    "gulp": "^4.0.0",
     "gulp-rename": "^1.2.0",
-    "gulp-tap": "^0.1.3",
-    "istanbul": "^0.3.8",
-    "jshint": "^2.6.3",
-    "mocha": "^2.2.1",
+    "gulp-tap": "^1.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
     "nid": "^0.3.2",
-    "should": "^7.0.0"
+    "should": "^13.2.3"
   },
   "main": "index.js",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/pierreinglebert/gulp-gzip/raw/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/pierreinglebert/gulp-zopfli/issues",
-    "email": "pierre.inglebert@gmail.com"
+    "url": "https://github.com/molant/gulp-zopfli/issues"
   }
 }

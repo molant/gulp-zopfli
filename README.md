@@ -1,13 +1,12 @@
-gulp-zopfli
+gulp-zopfli-node
 ===========
 
 a [Zopfli](http://en.wikipedia.org/wiki/Zopfli) plugin for [gulp](https://github.com/wearefractal/gulp),
-based on [node-zopfli](https://npmjs.org/package/node-zopfli).
+based on [`zopfli-node`][zopfli-node].
 
+**Note:** This is a fork of [gulp-zopfli](https://npmjs.org/package/gulp-zopfli) that hasn't been updated in a long time and uses an old version of [`node-zopfli`][node-zopfli] (replaced by [`zopfli-node`][zopfli-node] in this package).
 
 [![NPM version][npm-image]][npm-url]
-[![Linux Build Status][travis-image]][travis-url]
-[![Coverage Status][coveralls-image]][coveralls-url]
 [![Dependency Status][dep-image]][dep-url]
 [![devDependency Status][devDep-image]][devDep-url]
 
@@ -54,7 +53,7 @@ zopfli({ threshold: true })
 
 ### zopfliOptions `Object`
 
-Options object to pass through to node-zopfli. See [node-zopfli documentation](https://github.com/pierreinglebert/node-zopfli#options) for more information.
+Options object to pass through to zopfli-node. See [zopfli-node documentation](https://github.com/molant/node-zopfli#options) for more information.
 
 ```javascript
 {
@@ -90,13 +89,11 @@ Credit
 This plugin is based on [gulp-gzip](https://github.com/jstuckey/gulp-gzip).
 
 
-[npm-image]: https://img.shields.io/npm/v/gulp-zopfli.svg
-[npm-url]: https://www.npmjs.com/package/gulp-zopfli
-[travis-image]: https://img.shields.io/travis/pierreinglebert/gulp-zopfli/master.svg?label=Linux%20build
-[travis-url]: https://travis-ci.org/pierreinglebert/gulp-zopfli
-[coveralls-image]: https://img.shields.io/coveralls/pierreinglebert/gulp-zopfli.svg
-[coveralls-url]: https://coveralls.io/r/pierreinglebert/gulp-zopfli?branch=master
-[dep-image]: https://img.shields.io/david/pierreinglebert/gulp-zopfli.svg
-[dep-url]: https://david-dm.org/pierreinglebert/gulp-zopfli
-[devDep-image]: https://img.shields.io/david/dev/pierreinglebert/gulp-zopfli.svg
-[devDep-url]: https://david-dm.org/pierreinglebert/gulp-zopfli#info=devDependencies
+[npm-image]: https://img.shields.io/npm/v/gulp-zopfli-node.svg
+[npm-url]: https://www.npmjs.com/package/gulp-zopfli-node
+[dep-image]: https://img.shields.io/david/molant/gulp-zopfli.svg
+[dep-url]: https://david-dm.org/molant/gulp-zopfli
+[devDep-image]: https://img.shields.io/david/dev/molant/gulp-zopfli.svg
+[devDep-url]: https://david-dm.org/molant/gulp-zopfli#info=devDependencies
+[node-zopfli]: https://npmjs.org/package/node-zopfli
+[zopfli-node]: https://npmjs.org/package/zopfli-node
